@@ -10,11 +10,21 @@ export const authenticateToken = (req, res, next) => {
 
     // ----------- Verifing the token -----------
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.user = decoded; // Add decoded token data (e.g., userId) to the request object
-        next();
+        jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
+            if (error) {
+                if (error.name === 'TokenExpiredError') {
+                    return res.status(403).json({ message: 'Token has expired, please login again' });
+                } else {
+                    return res.status(403).json({ message: 'Invalid token, please login again' })
+                }
+            }
+            // Add decoded token data (e.g., userId) to the request object
+            req.user = decoded;
+            next();
+        });
+
     } catch (error) {
-        return res.status(403).json({ message: 'Invalid or expired token' });
+        return res.status(403).json({ error: 'Invalid or expired token', message: 'Please login' });
     }
 };
 

@@ -5,7 +5,7 @@ import { calculateTotalPriceOfCartItem, notFound } from "../utils/helpers.js"
 
 // ------------------------------ Get accsess to the user Cart ------------------------------
 export const cart = async (req, res) => {
-    const userId = req.user.userId // -------------------- auth user id 
+    const userId = req.user.userId // -------------------- Auth user id 
     try {
         const cart = await Cart.findOne({ userId })
         return res.status(200).json({ cart: cart })
@@ -54,7 +54,6 @@ export const addToCart = async (req, res) => {
 }
 
 // ------------------------------ Deleting item from cart ------------------------------
-
 export const deleteItem = async (req, res) => {
     const { productId } = req.body
     const userId = req.user.userId
@@ -71,7 +70,7 @@ export const deleteItem = async (req, res) => {
             return notFound(res, "Item")
         }
 
-        // updating the cartItems with filtered array
+        // ------------------ Updating the cartItems with filtered array ------------------
         cart.items = filteredItems
 
         // ------------------ Re calculate the total price ------------------ 
@@ -86,8 +85,8 @@ export const deleteItem = async (req, res) => {
     }
 }
 
-// ------------------------------ Updating quantity of the cart item ------------------------------
 
+// ------------------------------ Updating quantity of the cart item ------------------------------
 export const updateQuantity = async (req, res) => {
     const { quantity, productId } = req.body
     const userId = req.user.userId
@@ -99,7 +98,7 @@ export const updateQuantity = async (req, res) => {
         // ------------------ Filtering out the item which we want to delete ------------------
         const item = cart.items.find((item) => item.productId.toString() === productId)
 
-        // return if not found
+        // ------------------ Return if not found ------------------
         if (!item) {
             return notFound(res, "Item");
         }

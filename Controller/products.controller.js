@@ -39,14 +39,14 @@ export const createProduct = async (req, res) => {
     try {
         if (!req.file) return res.json({ error: "file is required." });
 
-        // Upload the image to Firebase and get the download URL
+        // ------------------- Upload the image to Firebase and get the download URL -------------------
         const image = await uploadImageToFirebase(req.file)
         const newProduct = new Product({
             name,
             price,
             description,
             stockQuantity,
-            image // Storing Firebase URL in the database
+            image // -------------------  Storing Firebase URL in the database
         })
 
         const storedProduct = await newProduct.save();
@@ -92,7 +92,7 @@ export const updateProduct = async (req, res) => {
         const productId = req.params.id
         const { name, price, description, stockQuantity } = req.body
 
-        const newImage = req.file // Get the uploaded image file
+        const newImage = req.file // ------------------- Get the uploaded image file
 
         const existingProduct = await Product.findById(productId);
         if (!existingProduct) return notFound(res)
