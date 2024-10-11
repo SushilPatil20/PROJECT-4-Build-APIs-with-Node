@@ -1,9 +1,10 @@
-import { cartItems, addToCart, deleteItem } from "../Controller/carts.controller.js"
+import { cart, addToCart, deleteItem, updateQuantity } from "../Controller/carts.controller.js"
 import authenticateToken from "../middlewares/auth.js"
 
 export const cartRoutes = (app) => {
-    app.get("/cart", authenticateToken, cartItems)
+    app.get("/cart", authenticateToken, cart)
     app.post("/cart/add-item/", authenticateToken, addToCart)
-    app.delete("/cart/delete-item/:itemId", authenticateToken, deleteItem)
+    app.delete("/cart/delete-item/", authenticateToken, deleteItem)
+    app.patch("/cart/update-item/", authenticateToken, updateQuantity)
 }
 

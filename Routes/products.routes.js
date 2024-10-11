@@ -4,7 +4,6 @@ import upload from "../middlewares/uploadImage.js"
 import { validate } from "../middlewares/validate.js"
 import { productValidationRules } from "../validators/productValidator.js"
 
-
 export const productRoutes = (app) => {
     app.get("/api/products", getAllProducts)
     app.get("/api/products/:id", getSingleProduct)

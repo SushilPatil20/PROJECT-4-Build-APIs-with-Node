@@ -17,7 +17,6 @@ export const getAllProducts = async (req, res) => {
 
 
 // ------------------- Get Product  -------------------
-
 export const getSingleProduct = async (req, res) => {
     try {
         const productId = req.params.id
