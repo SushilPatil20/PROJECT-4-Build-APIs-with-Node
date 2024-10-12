@@ -7,6 +7,7 @@ import { calculateTotalPriceOfCartItem, notFound } from "../utils/helpers.js"
 export const cart = async (req, res) => {
     const userId = req.user.userId // -------------------- Auth user id 
     try {
+        // ------------------ Get cart of the user by id ------------------
         const cart = await Cart.findOne({ userId })
         return res.status(200).json({ cart: cart })
     }

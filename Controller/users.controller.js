@@ -2,12 +2,7 @@ import User from "../Model/user.model.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt";
 
-
-
-// "password":"dipaleePatil12345"
-
-
-// ------------- Creating new user 
+// ------------- Creating new user -------------
 export const registerUser = async (req, res) => {
     const { name, email, password } = req.body
     try {
@@ -29,6 +24,7 @@ export const registerUser = async (req, res) => {
     }
 }
 
+// ------------- Verify User -------------
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -41,7 +37,7 @@ export const loginUser = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
 
         // --------------- Generate JWT token ---------------
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }); // --------------- Token will expires in 1 hour 
 
         return res.status(200).json({ message: 'Login successful', token: token });
     } catch (error) {

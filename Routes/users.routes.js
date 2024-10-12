@@ -1,8 +1,10 @@
 import { loginUser, registerUser } from "../Controller/users.controller.js";
 
 export const userRoutes = (app) => {
-    app.post("/register", registerUser);
-    app.post("/login", loginUser)
+    // ------------ Create new User ------------
+    app.post("/api/register", registerUser);
+    // ------------ Verify User ------------
+    app.post("/api/login", loginUser)
 }
 
 export default userRoutes
