@@ -5,7 +5,7 @@ import mongoose from "mongoose"
  * @param {String} URI 
  * @returns void
  */
-const connectionToDB = (URI) => {
+const connectionToDB = async (URI) => {
     mongoose.connect(URI)
     const db = mongoose.connection
     db.on("open", () => {

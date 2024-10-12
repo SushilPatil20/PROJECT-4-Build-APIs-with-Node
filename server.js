@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 7000
 
 app.use(express.json())  // --------- Middleware to parse the JSON data.
 
-connectionToDB(process.env.DB_URI); // ---------- Connecting to the database
+await connectionToDB(process.env.DB_URI); // ---------- Connecting to the database
 
 userRoutes(app) // --------------------- Calling user routes 
 cartRoutes(app) // --------------------- Calling cart routes
