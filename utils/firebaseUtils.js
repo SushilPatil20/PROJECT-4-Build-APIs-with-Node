@@ -18,6 +18,7 @@ export const uploadImageToFirebase = async (file) => {
 
     // ------------ Get the URL for the uploaded file ------------
     const downloadURL = await getDownloadURL(snapshot.ref);
+    // console.log(downloadURL)
 
     return downloadURL;  // ------------ Return Firebase URL
 };
